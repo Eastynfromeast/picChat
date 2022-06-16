@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import './css/App.css';
-import LogIn from './login';
 
 function App() {
 	return (
@@ -12,18 +11,9 @@ function App() {
 					borderBottom: 'solid 1px',
 					paddingBottom: '1rem',
 				}}
-			>
-				<Link to="/login"> Login </Link>
-			</nav>
+			></nav>
+			<Link to="/login"> Login </Link>
 		</div>
-		// <Router>
-		//   <div className="App">
-		//   <Link to="/login">
-		//     <button> Login </button>
-		//   </Link>
-		//   <Route path="/login" element={<LogIn/>} />
-		//   </div>
-		// </Router>
 	);
 }
 

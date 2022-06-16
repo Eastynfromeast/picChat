@@ -1,18 +1,16 @@
 import React from 'react';
-// import logo from './logo.svg';
-import './css/App.css';
-import 'firebase/firestore';
+
+import firebase from 'firebase/app';
 import 'firebase/auth';
-import { signInWithGoogle } from './firebase';
-import { auth } from './firebase';
+import 'firebase/database';
 
 interface userId {
 	id: string | number;
 }
 
-function LogIn() {
+function Login() {
 	return (
-		<div className="App">
+		<div id="firebaseui-auth-container">
 			<h1>This will be the login page </h1>
 			<div>
 				<label htmlFor="userId"> ID : </label>
@@ -27,9 +25,7 @@ function LogIn() {
 	);
 }
 
-export default LogIn;
-
-// routing 설정
+export default Login;
 
 // 기존 유저
 // login -> main

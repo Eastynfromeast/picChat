@@ -1,8 +1,7 @@
-import React from "react";
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
-// import logo from './logo.svg';
-import "./css/App.css";
-import LogIn from "./login";
+import React from 'react';
+import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import './css/App.css';
+import LogIn from './login';
 
 function App() {
 	return (
@@ -10,8 +9,8 @@ function App() {
 			<h1>picChat</h1>
 			<nav
 				style={{
-					borderBottom: "solid 1px",
-					paddingBottom: "1rem",
+					borderBottom: 'solid 1px',
+					paddingBottom: '1rem',
 				}}
 			>
 				<Link to="/login"> Login </Link>

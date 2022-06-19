@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
-import './css/App.css';
-import AuthProvider from './provider/authProvider';
+import { Link } from 'react-router-dom';
 
 function App() {
 	return (

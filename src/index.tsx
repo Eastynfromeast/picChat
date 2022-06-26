@@ -5,9 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './login';
-import { auth } from './service/firebase';
-
-console.log(auth);
+import './service/firebase';
+import Main from './main';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -17,6 +16,7 @@ root.render(
 		<Routes>
 			<Route path="/" element={<App />} />
 			<Route path="/login" element={<Login />} />
+			<Route path="/home" element={<Main />} />
 		</Routes>
 	</BrowserRouter>
 );

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { AuthContext } from '../context/authContext';
 import { auth } from '../service/firebase';
 
-function AuthProvider(children: undefined) {
+function AuthProvider({ children }: { children: undefined }) {
 	const [user, setUser] = useState<User | null>(null);
 
 	useEffect(() => {

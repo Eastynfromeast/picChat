@@ -1,7 +1,6 @@
 import React from 'react';
 import {
 	getAuth,
-	onAuthStateChanged,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
@@ -13,11 +12,15 @@ function Login() {
 
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
+	const [newBee, setNewBee] = React.useState(false);
 	const inputEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
 	};
 	const inputPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(event?.target.value);
+	};
+	const creatingNewBee = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setNewBee(pre => !pre);
 	};
 
 	const signUp = (email: string, password: string) => {
@@ -29,8 +32,7 @@ function Login() {
 				alert('Sign Up is completed');
 			})
 			.catch(error => {
-				const errorCode = error.code;
-				const errorMessage = error.message;
+				console.log(error);
 			});
 	};
 
@@ -39,11 +41,11 @@ function Login() {
 			.then(userCredential => {
 				// Signed in
 				//const user = userCredential.user;
-				alert('We will lead you to home');
+				alert('We are moving to home sweet home');
 				navigateHome();
 			})
 			.catch(error => {
-				alert(error);
+				console.log(error);
 			});
 	};
 
@@ -51,23 +53,11 @@ function Login() {
 		navigate('../home', { replace: true });
 	};
 
-	const onAuthChanged = (user: string) => {
-		onAuthStateChanged(auth, user => {
-			if (user) {
-				// User is signed in, see docs for a list of available properties
-				// https://firebase.google.com/docs/reference/js/firebase.User
-				const uid = user.uid;
-				// ...
-			} else {
-				// User is signed out
-				// ...
-			}
-		});
-	};
-
-	const onSubmit = () => {
-		signIn(email, password);
+	const createUser = () => {
 		signUp(email, password);
+	};
+	const login = () => {
+		signIn(email, password);
 	};
 
 	return (
@@ -90,7 +80,8 @@ function Login() {
 					onChange={inputPassword}
 				/>
 			</div>
-			<button onClick={onSubmit}> Login </button>
+			<button onClick={createUser}> Sign Up</button>
+			<button onClick={login}> Log in </button>
 		</div>
 	);
 }

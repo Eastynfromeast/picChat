@@ -12,15 +12,12 @@ function Login() {
 
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
-	const [newBee, setNewBee] = React.useState(false);
+
 	const inputEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
 	};
 	const inputPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(event?.target.value);
-	};
-	const creatingNewBee = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setNewBee(pre => !pre);
 	};
 
 	const signUp = (email: string, password: string) => {
@@ -50,7 +47,7 @@ function Login() {
 	};
 
 	const navigateHome = () => {
-		navigate('../home', { replace: true });
+		navigate('../main', { replace: true });
 	};
 
 	const createUser = () => {

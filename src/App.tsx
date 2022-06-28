@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 function App() {
+	const auth = getAuth();
+	const user = auth.currentUser;
+	let navigate = useNavigate();
+
+	const navigateHome = () => {
+		navigate('../main', { replace: true });
+	};
+	const navigateLogin = () => {
+		navigate('./login', { replace: true });
+	};
+	useEffect(() => {
+		if (user !== null) {
+			navigateHome();
+			console.log(user);
+		} else {
+			navigateLogin();
+		}
+	}, []);
+
 	return (
 		<div>
 			<h1>picChat</h1>
@@ -17,14 +37,3 @@ function App() {
 }
 
 export default App;
-
-// routing 설정
-
-// 기존 유저
-// login -> main
-
-// new user
-// login -> signup (login) -> main
-
-// 로그인된 유저
-// main

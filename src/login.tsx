@@ -23,13 +23,18 @@ function Login() {
 	const signUp = (email: string, password: string) => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {
-				// Signed in
 				const user = userCredential.user;
 				console.log(user);
 				alert('Sign Up is completed');
 			})
 			.catch(error => {
-				console.log(error);
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				if (errorCode === 'auth/email-already-in-use') {
+					alert('This email is already taken. Choose another one.');
+				} else {
+					alert(errorMessage);
+				}
 			});
 	};
 
@@ -42,7 +47,7 @@ function Login() {
 				navigateHome();
 			})
 			.catch(error => {
-				console.log(error);
+				alert(error.message);
 			});
 	};
 

@@ -7,20 +7,23 @@ function App() {
 	const user = auth.currentUser;
 	let navigate = useNavigate();
 
-	const navigateHome = () => {
-		navigate('../main', { replace: true });
-	};
-	const navigateLogin = () => {
-		navigate('./login', { replace: true });
-	};
 	useEffect(() => {
 		if (user !== null) {
-			navigateHome();
-			console.log(user);
+			try {
+				alert(user.email + ' is logged in!');
+				navigate('../main', { replace: true });
+			} catch (error) {
+				alert(error);
+			}
 		} else {
-			navigateLogin();
+			try {
+				alert('You are not a user of picChat. We are moving to login page');
+				navigate('./login', { replace: true });
+			} catch (error) {
+				alert(error);
+			}
 		}
-	}, []);
+	}, [navigate, user]);
 
 	return (
 		<div>

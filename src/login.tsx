@@ -20,6 +20,7 @@ function Login() {
 		setPassword(event?.target.value);
 	};
 
+	// try, catch + async await
 	const signUp = (email: string, password: string) => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(userCredential => {

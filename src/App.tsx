@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+
 function App() {
 	const auth = getAuth();
 	const user = auth.currentUser;
 	let navigate = useNavigate();
-
+	// const [checkLoginAndRoute]: any = useNavigateLogin();
 	useEffect(() => {
+		// checkLoginAndRoute();
 		if (user !== null) {
 			try {
 				alert(user.email + ' is logged in!');
@@ -23,7 +25,7 @@ function App() {
 				alert(error);
 			}
 		}
-	}, [navigate, user]);
+	});
 
 	return (
 		<div>

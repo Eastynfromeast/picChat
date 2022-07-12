@@ -1,14 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
-import { getStorage, ref } from 'firebase/storage';
 
 function Main() {
 	const navigate = useNavigate();
 	const auth = getAuth();
-
-	const storage = getStorage();
-	const storageRef = ref(storage);
 
 	const signOutUser = () => {
 		signOut(auth)
@@ -29,14 +25,15 @@ function Main() {
 		}
 	};
 
-	// const upload
 	return (
 		<div>
 			<h2> Home Sweet Home </h2>
 			<button onClick={navigateApp}> Go back to App </button>
 			<button onClick={signOutUser}> Log out </button>
 			<div>
-				<button> Upload </button>
+				<button>
+					<Link to="/uploadImage"> Login </Link>
+				</button>
 			</div>
 		</div>
 	);

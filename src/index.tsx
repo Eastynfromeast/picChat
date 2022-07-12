@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './login';
 import './service/firebase';
 import Main from './main';
+import UploadImage from './uploadImage';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ root.render(
 			<Route path="/" element={<App />} />
 			<Route path="/login" element={<Login />} />
 			<Route path="/main" element={<Main />} />
+			<Route path="/uploadImage" element={<UploadImage />} />
 		</Routes>
 	</BrowserRouter>
 );

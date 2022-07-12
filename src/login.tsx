@@ -65,24 +65,26 @@ function Login() {
 
 	return (
 		<div>
-			<div>
-				<label htmlFor="id"> ID : </label>
-				<input
-					type="email"
-					placeholder="Insert your email"
-					value={email}
-					onChange={inputEmail}
-				/>
-			</div>
-			<div>
-				<label htmlFor="pw">Password : </label>
-				<input
-					type="password"
-					placeholder="Insert your password"
-					value={password}
-					onChange={inputPassword}
-				/>
-			</div>
+			<form>
+				<div>
+					<label htmlFor="id"> ID : </label>
+					<input
+						type="email"
+						placeholder="Insert your email"
+						value={email}
+						onChange={inputEmail}
+					/>
+				</div>
+				<div>
+					<label htmlFor="pw">Password : </label>
+					<input
+						type="password"
+						placeholder="Insert your password"
+						value={password}
+						onChange={inputPassword}
+					/>
+				</div>
+			</form>
 			<button onClick={createUser}> Sign Up</button>
 			<button onClick={login}> Log in </button>
 		</div>

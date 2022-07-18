@@ -32,7 +32,7 @@ function Main() {
 			<button onClick={signOutUser}> Log out </button>
 			<div>
 				<button>
-					<Link to="/uploadImage"> Login </Link>
+					<Link to="/uploadImage"> Upload Image </Link>
 				</button>
 			</div>
 		</div>

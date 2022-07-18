@@ -11,7 +11,7 @@ function UploadImage() {
 
 	const [image, setImage] = React.useState('');
 	const [imgTitle, setImgTitle] = React.useState('');
-	const [attachment, setAttachment] = React.useState('');
+	const [attachment, setAttachment] = React.useState<EventTarget | null>(null);
 	const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {
 			target: { files, value },
@@ -21,7 +21,6 @@ function UploadImage() {
 		setImage(value);
 		fileReader.onloadend = finishedEvent => {
 			const { currentTarget: result } = finishedEvent;
-
 			setAttachment(result);
 		};
 		//fileReader.readAsDataURL(theFile);
@@ -30,6 +29,7 @@ function UploadImage() {
 		setImgTitle(event?.target.value);
 	};
 
+	//const response = await attachmentRef.putString(attachment, "data_url")
 	const postImage = (file: any) => {
 		// const storageRef = ref(storage);
 		// uploadBytes(storageRef, file).then(snapshot => {

@@ -1,42 +1,58 @@
 import React from 'react';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
-import { resourceLimits } from 'worker_threads';
+import { ref, uploadString } from 'firebase/storage';
+import { storage } from './service/firebase';
 
 function UploadImage() {
-	const storage = getStorage();
-	const storageRef = ref(storage);
+	// const imageRef = ref(storage, 'tt_sanso_01.jpg');
 
-	const imageRef = ref(storage, 'tt_sanso_01.jpg');
-	//const [attachment, setAttachment] = React.useState('');
-
-	const [image, setImage] = React.useState('');
-	const [imgTitle, setImgTitle] = React.useState('');
-	const [attachment, setAttachment] = React.useState<EventTarget | null>(null);
-	const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const [image, setImage] = React.useState<string | undefined>('');
+	const [imgTitle, setImgTitle] = React.useState<string | undefined>('');
+	const [attachment, setAttachment] = React.useState<any>();
+	const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const {
 			target: { files, value },
 		} = event;
-		const theFile = files ? [0] : null;
-		const fileReader: FileReader = new FileReader();
-		setImage(value);
-		fileReader.onloadend = finishedEvent => {
-			const { currentTarget: result } = finishedEvent;
-			setAttachment(result);
-		};
-		//fileReader.readAsDataURL(theFile);
+
+		const theFile: File | null = files ? files[0] : null;
+
+		if (theFile != null) {
+			const fileReader: FileReader = new FileReader();
+			setImage(value);
+			fileReader.onloadend = (finishedEvent: ProgressEvent<FileReader>) => {
+				const { target: result } = finishedEvent;
+				setAttachment(result?.result);
+				console.log(attachment);
+			};
+
+			fileReader.readAsDataURL(theFile);
+			// return theFile;
+		} else {
+			console.log('There is no file available');
+		}
 	};
-	const handleImgTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+	const handleImgTitle = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setImgTitle(event?.target.value);
 	};
 
-	//const response = await attachmentRef.putString(attachment, "data_url")
-	const postImage = (file: any) => {
-		// const storageRef = ref(storage);
-		// uploadBytes(storageRef, file).then(snapshot => {
-		// 	alert('Uploaded a blob or file!');
-		// });
+	const postImage = (event: React.FormEvent): void => {
+		event.preventDefault();
+
+		if (attachment != null) {
+			const fileName: string | null = imgTitle ? imgTitle : null;
+			const storageRef = ref(storage, 'images/' + fileName + '.jpg');
+
+			// Data URL string
+			uploadString(storageRef, attachment, 'data_url').then(snapshot => {
+				alert('Uploaded a data_url string!');
+			});
+		}
 	};
 
+	const clearAttachment = (event: React.MouseEvent<HTMLButtonElement>): void => {
+		setAttachment(null);
+		setImage('');
+	};
 	return (
 		<div>
 			<h2> Upload Image </h2>
@@ -47,17 +63,12 @@ function UploadImage() {
 				<br />
 				<label htmlFor="imageTitle">Title for image :</label>
 				<br />
-				<input
-					type="text"
-					id="imageTitle"
-					value={imgTitle}
-					onChange={handleImgTitle}
-				/>
+				<input type="text" id="imageTitle" value={imgTitle} onChange={handleImgTitle} />
 				<button onClick={postImage}> post the image</button>
 				{attachment && (
 					<div>
-						<img src={attachment} width="50px" height="50px" alt="attachment" />
-						<button>Clear</button>
+						<img src={attachment} width="100px" height="100px" alt={imgTitle} />
+						<button onClick={clearAttachment}> Clear </button>
 					</div>
 				)}
 			</form>

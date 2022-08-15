@@ -1,4 +1,8 @@
+// import firebase from 'firebase/app';
 import { initializeApp } from 'firebase/app';
+import firebase from 'firebase/compat/app';
+// import 'firebase/compat/auth';
+// import 'firebase/compat/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
@@ -12,7 +16,10 @@ const firebaseConfig = {
 	measurementId: 'G-QCGKY16LEE',
 };
 
+export const firebaseInstance = firebase;
+
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+// export const storageServie = firebase.storage();

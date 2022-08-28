@@ -2,12 +2,13 @@ import React from 'react';
 import { ref, uploadString } from 'firebase/storage';
 import { storage } from './service/firebase';
 
-function UploadImage() {
+function PostImage() {
 	// const imageRef = ref(storage, 'tt_sanso_01.jpg');
 
 	const [image, setImage] = React.useState<string | undefined>('');
 	const [imgTitle, setImgTitle] = React.useState<string | undefined>('');
 	const [attachment, setAttachment] = React.useState<any>();
+	const [imgText, setImgText] = React.useState<string | undefined>('');
 	const onFileSelected = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		const {
 			target: { files, value },
@@ -33,6 +34,11 @@ function UploadImage() {
 
 	const handleImgTitle = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setImgTitle(event?.target.value);
+	};
+
+	const handleImgText = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+		// const target = (event.target as HTMLTextAreaElement)
+		setImgText(event?.target.value);
 	};
 
 	const postImage = (event: React.FormEvent): void => {
@@ -64,6 +70,10 @@ function UploadImage() {
 				<label htmlFor="imageTitle">Title for image :</label>
 				<br />
 				<input type="text" id="imageTitle" value={imgTitle} onChange={handleImgTitle} />
+				<div>
+					<label htmlFor="imageText"> Write down text for the image selected.</label>
+					<textarea id="imageText" rows={5} value={imgText} onChange={handleImgText} />
+				</div>
 				<button onClick={postImage}> post the image</button>
 				{attachment && (
 					<div>
@@ -76,4 +86,4 @@ function UploadImage() {
 	);
 }
 
-export default UploadImage;
+export default PostImage;
